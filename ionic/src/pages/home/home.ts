@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams} from 'ionic-angular';
 import { Http } from '@angular/http';
-import { ListPage } from '../list/list';
 import { SignupPage } from '../signup/signup';
 import { LoginPage } from '../login/login';
+import { ConfigurationPage } from '../configuration/configuration';
 
 @Component({
     selector: 'page-home',
@@ -16,23 +16,25 @@ export class HomePage {
         this.userId = this.navParams.get("userId");
         console.log("USERID:"+this.userId);
     }
-    goToList(){
-        this.navCtrl.push(ListPage);
-    }
     goToSignup(){
         this.navCtrl.push(SignupPage);
     }
     goToLogin(){
         this.navCtrl.push(LoginPage);
     }
-
+    goToConfiguration(){
+        this.navCtrl.push(ConfigurationPage,{
+            userId:this.userId
+        });
+    }
     trigger(){
         this.http.post("http://redbutton_node.slapps.fr/",{
-            user:"s",
+            userId:this.userId,
+            //user:"s",
             email:"ste.luong@gmail.com",
-            dest:"ste.luong@gmail.com",
-            subject:"Hello !",
-            message:"Hello, tout va bien ?"
+            //dest:"ste.luong@gmail.com",
+            //subject:"Hello !",
+            //message:"Hello, tout va bien ?"
         }).subscribe(data => {
             console.log(data);
         });

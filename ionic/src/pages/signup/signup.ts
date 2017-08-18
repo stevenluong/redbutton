@@ -14,7 +14,7 @@ export class SignupPage {
 
     }
     signup(){
-        this.http.post("http://redbutton_loopback.slapps.fr/api/Users",{
+        this.http.post("https://redbutton_loopback.slapps.fr:3000/api/Users",{
             email:"ste.luong2@gmail.com",
             password:"test"
         }).subscribe(data=>{

@@ -4,6 +4,7 @@ ror/log/
 ror/public/assets/
 ror/vendor/bundle/
 ror/vendor/cache/
+config.js
 *.swp
 *.swo
 

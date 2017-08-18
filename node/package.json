@@ -15,6 +15,9 @@
         "forever": "*",
         "kue": "*",
         "cron": "*",
+        "cors": "*",
+        "nodemailer": "*",
+        "body-parser": "*",
         "querystring": "*"
 
     }

@@ -13,7 +13,7 @@ export class LoginPage {
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
     }
     login(){
-        this.http.post("http://redbutton_loopback.slapps.fr/api/Users/login",{
+        this.http.post("https://redbutton_loopback.slapps.fr:3000/api/Users/login",{
             email:"ste.luong@gmail.com",
             password:"test"
         }).subscribe(data=>{
@@ -22,7 +22,7 @@ export class LoginPage {
             var userId = data.json().userId;
             console.log(token);
             console.log(userId);
-            this.navCtrl.push(HomePage,{
+            this.navCtrl.setRoot(HomePage,{
                 token:token,
                 userId:userId
             });
