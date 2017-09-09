@@ -38,19 +38,19 @@ services:
         #    - "3000:3000"
         networks:
             - nginx_default
-        #http:
-        #build: http/.
-        #command: http-server . -p 80
+    ionic:
+        build: ionic/.
+        #command: bash -c "npm rebuild node-sass --force && ionic serve --no-interactive --address 0.0.0.0"
+        command: bash -c "ionic serve --no-interactive --address 0.0.0.0 --nolivereload"
         #depends_on: 
         #    - ror
         #ports:
         #    - "8080:80"
-        #volumes:
-        #    - ./http/:/http
-        #    - /http/node_modules
-        #restart: always
-        #networks:
-        #    - nginx_default
+        volumes:
+            - ./ionic/:/ionic
+        restart: always
+        networks:
+            - nginx_default
         #redis:
         #build: redis/.
         #image: redis

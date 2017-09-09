@@ -9,12 +9,16 @@ import { ConfigurationPage } from '../configuration/configuration';
     selector: 'page-home',
     templateUrl: 'home.html'
 })
-export class HomePage {
+export class HomePage { 
+    sent:boolean;
     userId:string;
+    email:string;
     constructor(public navCtrl: NavController, public http: Http, public navParams: NavParams) {
         var token = this.navParams.get("token");
         this.userId = this.navParams.get("userId");
+        this.email= this.navParams.get("email");
         console.log("USERID:"+this.userId);
+	this.sent = false;
     }
     goToSignup(){
         this.navCtrl.push(SignupPage);
@@ -24,30 +28,18 @@ export class HomePage {
     }
     goToConfiguration(){
         this.navCtrl.push(ConfigurationPage,{
-            userId:this.userId
+            userId:this.userId,
+            email:this.email
         });
     }
     trigger(){
-        this.http.post("http://redbutton_node.slapps.fr/",{
+        this.http.post("https://redbutton-node.slapps.fr/",{
             userId:this.userId,
-            //user:"s",
-            email:"ste.luong@gmail.com",
-            //dest:"ste.luong@gmail.com",
-            //subject:"Hello !",
-            //message:"Hello, tout va bien ?"
+            //TODO PUT in NODE
+            email:this.email,
         }).subscribe(data => {
             console.log(data);
-        });
-    }
-    test(){
-        this.http.post("http://redbutton_node.slapps.fr/",{
-            user:"s",
-            email:"ste.luong@gmail.com",
-            dest:"ste.luong@gmail.com",
-            subject:"TEST!",
-            message:"TEST TEST TEST"
-        }).subscribe(data => {
-            console.log(data);
+            this.sent = true;
         });
     }
 

@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
-//import { HomePage } from '../home/home';
+import { HomePage } from '../home/home';
 import 'rxjs/add/operator/map'
 @Component({
     selector: 'page-configuration',
@@ -13,10 +13,12 @@ export class ConfigurationPage {
     recipient:string;
     templateId:number;
     userId:number;
+    email:string;
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
         this.userId = this.navParams.get("userId");
+        this.email= this.navParams.get("email");
         //TODO UPDATE VERY BAD
-        this.http.get("https://redbutton_loopback.slapps.fr:3000/api/Templates").map(res => res.json()).subscribe(data => {
+        this.http.get("https://redbutton-loopback.slapps.fr/api/Templates").map(res => res.json()).subscribe(data => {
             for(var i=0;i<data.length;i++){
                 var t = data[i];
                 if(t.userId==this.userId){
@@ -30,7 +32,7 @@ export class ConfigurationPage {
         });
     }
     update(){
-        this.http.put("https://redbutton_loopback.slapps.fr:3000/api/Templates",{
+        this.http.put("https://redbutton-loopback.slapps.fr/api/Templates",{
             subject:this.subject,
             message:this.message,
             recipient:this.recipient,
@@ -38,12 +40,10 @@ export class ConfigurationPage {
             id:this.templateId
         }).subscribe(data=>{
             console.log(data);
-            /*
             this.navCtrl.setRoot(HomePage,{
-                token:token,
-                userId:userId
+                userId:this.userId,
+                email:this.email
             });
-             */
         });
     }
 

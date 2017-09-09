@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { Http } from '@angular/http';
-import { LoginPage } from '../login/login';
+import { ConfigurationPage } from '../configuration/configuration';
 import 'rxjs/add/operator/map'
 @Component({
     selector: 'page-signup',
@@ -11,15 +11,20 @@ export class SignupPage {
     email:string;
     password:string;
     constructor(public navCtrl: NavController, public navParams: NavParams, public http: Http, public loadingCtrl: LoadingController) {
-
+        this.email = "";
+        this.password = "";
     }
     signup(){
-        this.http.post("https://redbutton_loopback.slapps.fr:3000/api/Users",{
-            email:"ste.luong2@gmail.com",
-            password:"test"
+        this.http.post("https://redbutton-loopback.slapps.fr/api/Users",{
+            email:this.email,
+            password:this.password
         }).subscribe(data=>{
             console.log(data);
-            this.navCtrl.push(LoginPage);
+            var userId = data.json().userId;
+            this.navCtrl.setRoot(ConfigurationPage,{
+userId:userId,
+email:this.email
+});
         });
     }
 }

@@ -10,13 +10,19 @@
 <ion-content padding>
   <h3>Red Button</h3>
 
-  <p>
-  </p>
   <div *ngIf="userId">
+  <div *ngIf="!sent">
   <button ion-button large color="danger" (click)="trigger()">RED BUTTON</button>
+  </div>
+  <div *ngIf="sent">
+  <b> SENT </b>
+  </div>
+
   <br/>
+  <!--
   <button ion-button large (click)="test()">TEST</button>
   <br/>
+  -->
   <button ion-button clear (click)="goToConfiguration()">Go To Configuration</button>
   </div>
   <div *ngIf="!userId">

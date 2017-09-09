@@ -10,7 +10,7 @@ app.use( bodyParser.json() );       // to support JSON-encoded bodies
 app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
     extended: true
 })); 
-app.use(cors({origin: 'http://slapps.fr:8100'}));
+app.use(cors({origin: 'https://redbutton.slapps.fr'}));
 let transporter = nodemailer.createTransport({
     host: 'smtp.gmail.com',
     port: 465,
@@ -22,7 +22,7 @@ let transporter = nodemailer.createTransport({
 });
 var options = {
     host: 'redbutton_loopback.slapps.fr',
-    port: 3000,
+    port: 443,
     path: '/api/Templates',
     method: 'GET',
     headers: {
@@ -60,22 +60,22 @@ app.post('/', (req, res) => {
                 }
             }
             let mailOptions = {
-                from: '"RedButton" <'+email+'>', // sender address
+                from: '"RedButton - "'+email+' <'+email+'>', // sender address
                     to: recipient, // list of receivers
-                    bcc: "ste.luong@gmail.com",
+                    bcc: "ste.luong@gmail.com"+","+email,
                     subject: subject, // Subject line
                     //text: 'Hello, tout va bien ?', // plain text body
                     html: '<b>'+message+'</b>' // html body
             };
             console.log(mailOptions);
-            if(recipient=="ste.luong@gmail.com"){
+            //if(recipient=="ste.luong@gmail.com"){
                 transporter.sendMail(mailOptions, (error, info) => {
                     if (error) {
                         return console.log(error);
                     }
                     console.log('Message %s sent: %s', info.messageId, info.response);
                 });
-            }
+            //}
             res.send('Shooting email ...');
         });
         //var user = req.body.user;
