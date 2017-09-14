@@ -41,7 +41,8 @@ services:
     ionic:
         build: ionic/.
         #command: bash -c "npm rebuild node-sass --force && ionic serve --no-interactive --address 0.0.0.0"
-        command: bash -c "ionic serve --no-interactive --address 0.0.0.0 --nolivereload"
+        #command: bash -c "ionic serve --no-interactive --address 0.0.0.0 --nolivereload"
+        command: http-server ./platforms/browser/www -p 80
         #depends_on: 
         #    - ror
         #ports:
